@@ -1,6 +1,6 @@
 services:
   open-webui:
-    image: ${DOCKER_REGISTRY:-yyzhang4}/open-webui:${IMAGE_TAG:-latest}
+    image: ${DOCKER_REGISTRY:-open-webui}/open-webui:${IMAGE_TAG:-latest}
     container_name: ${CONTAINER_NAME:-open-webui}
     volumes:
       - ${DATA_DIR:-/app/backend/data}:/app/backend/data
