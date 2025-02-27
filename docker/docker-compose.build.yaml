@@ -12,4 +12,4 @@ services:
         USE_RERANKING_MODEL: ${USE_RERANKING_MODEL:-}
         USE_WHISPER_MODEL: ${USE_WHISPER_MODEL:-base}
         USE_TIKTOKEN_ENCODING_NAME: ${USE_TIKTOKEN_ENCODING_NAME:-cl100k_base}
-    image: ${DOCKER_REGISTRY:-open-webui}/open-webui:${IMAGE_TAG:-latest}
+    image: ${DOCKER_IMAGE:-open-webui/open-webui}:${IMAGE_TAG:-latest}
