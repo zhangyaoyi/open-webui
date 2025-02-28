@@ -5,6 +5,7 @@ IMAGE_TAG=latest
 # Build Docker images
 build-dev:
 	@echo "Building web Docker image: $(DOCKER_REPOSITORY):$(IMAGE_TAG)..."
+
 	docker-compose -f docker-compose.build.yaml \
 		--env-file .env.build \
 		build \
@@ -16,6 +17,7 @@ build-dev:
 
 build-prd:
 	@echo "Building web Docker image: $(DOCKER_REPOSITORY):$(IMAGE_TAG)..."
+
 	docker-compose -f docker-compose.build.yaml \
 		--env-file .env.build \
 		build \
@@ -28,7 +30,9 @@ build-prd:
 # Push Docker images
 push:
 	@echo "Pushing web Docker image: $(DOCKER_REPOSITORY):$(IMAGE_TAG)..."
+
 	docker push $(DOCKER_REPOSITORY):$(IMAGE_TAG)
+	
 	@echo "Web Docker image pushed successfully: $(DOCKER_REPOSITORY):$(IMAGE_TAG)"
 
 release: build-prd push
