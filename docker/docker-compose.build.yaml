@@ -3,11 +3,12 @@ services:
     build:
       context: ${CONTEXT:-.}
       dockerfile: docker/Dockerfile
-      platforms: 
+      platforms:
         - ${BUILD_PLATFORM:-linux/amd64}
       args:
         USE_CUDA: ${USE_CUDA:-false}
         USE_CUDA_VER: ${USE_CUDA_VER:-cu121}
+        USE_OLLAMA: ${USE_OLLAMA:-false}
         USE_EMBEDDING_MODEL: ${USE_EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
         USE_RERANKING_MODEL: ${USE_RERANKING_MODEL:-}
         USE_WHISPER_MODEL: ${USE_WHISPER_MODEL:-base}

@@ -6,6 +6,8 @@ services:
       - ${DATA_DIR:-/app/backend/data}:/app/backend/data
     ports:
       - ${OPEN_WEBUI_PORT-3000}:8080
+    environment:
+      - WEBUI_NAME=${WEBUI_NAME:-Open WebUI}
 
 volumes:
   open-webui: {}

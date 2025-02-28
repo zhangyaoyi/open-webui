@@ -2,6 +2,7 @@
 # Initialize device type args
 # use build args in the docker build command with --build-arg="BUILDARG=true"
 ARG USE_CUDA=false
+ARG USE_OLLAMA=false
 # Tested with cu117 for CUDA 11 and cu121 for CUDA 12 (default)
 ARG USE_CUDA_VER=cu121
 # any sentence transformer model; models to use can be found at https://huggingface.co/models?library=sentence-transformers
@@ -39,6 +40,7 @@ FROM python:3.11-slim-bookworm AS base
 # Use args
 ARG USE_CUDA
 ARG USE_CUDA_VER
+ARG USE_OLLAMA
 ARG USE_EMBEDDING_MODEL
 ARG USE_RERANKING_MODEL
 ARG USE_WHISPER_MODEL
@@ -52,6 +54,7 @@ ENV ENV=prod \
     # pass build args to the build
     USE_CUDA_DOCKER=${USE_CUDA} \
     USE_CUDA_DOCKER_VER=${USE_CUDA_VER} \
+    USE_OLLAMA_DOCKER=${USE_OLLAMA} \
     USE_EMBEDDING_MODEL_DOCKER=${USE_EMBEDDING_MODEL} \
     USE_RERANKING_MODEL_DOCKER=${USE_RERANKING_MODEL} \
     USE_WHISPER_MODEL_DOCKER=${USE_WHISPER_MODEL} \
