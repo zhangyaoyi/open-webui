@@ -1236,6 +1236,7 @@
 															toast.error($i18n.t('Permission denied when accessing microphone'));
 														}
 													}}
+													disabled={true}
 													aria-label="Voice Input"
 												>
 													<svg
@@ -1315,6 +1316,7 @@
 																	);
 																}
 															}}
+															disabled={true}
 															aria-label="Call"
 														>
 															<Headphone className="size-5" />

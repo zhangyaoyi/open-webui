@@ -498,6 +498,7 @@
 								<div class=" self-center">{$i18n.t('Personalization')}</div>
 							</button>
 						{:else if tabId === 'audio'}
+							{#if $user.role === 'admin'}
 							<button
 								class="px-0.5 py-1 min-w-fit rounded-lg flex-1 md:flex-none flex text-left transition {selectedTab ===
 								'audio'
@@ -524,6 +525,7 @@
 								</div>
 								<div class=" self-center">{$i18n.t('Audio')}</div>
 							</button>
+							{/if}
 						{:else if tabId === 'chats'}
 							<button
 								class="px-0.5 py-1 min-w-fit rounded-lg flex-1 md:flex-none flex text-left transition {selectedTab ===
@@ -577,6 +579,7 @@
 								<div class=" self-center">{$i18n.t('Account')}</div>
 							</button>
 						{:else if tabId === 'about'}
+							{#if $user.role === 'admin'}
 							<button
 								class="px-0.5 py-1 min-w-fit rounded-lg flex-1 md:flex-none flex text-left transition {selectedTab ===
 								'about'
@@ -602,6 +605,7 @@
 								</div>
 								<div class=" self-center">{$i18n.t('About')}</div>
 							</button>
+							{/if}
 						{:else if tabId === 'admin'}
 							{#if $user.role === 'admin'}
 								<button
