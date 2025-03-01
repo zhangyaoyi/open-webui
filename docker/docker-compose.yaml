@@ -14,3 +14,65 @@ services:
         USE_WHISPER_MODEL: ${USE_WHISPER_MODEL:-base}
         USE_TIKTOKEN_ENCODING_NAME: ${USE_TIKTOKEN_ENCODING_NAME:-cl100k_base}
     image: ${DOCKER_REPOSITORY:-open-webui/open-webui}:${IMAGE_TAG:-latest}
+    container_name: ${OPEN_WEBUI_CONTAINER_NAME:-open-webui}
+    volumes:
+      - ${OPEN_WEBUI_DATA_DIR:-open-webui/data}:/app/backend/data:rw
+    ports:
+      - "${OPEN_WEBUI_PORT-3000}:8080"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:passwd@postgres:5432/postgres}
+      TZ: ${TZ:-UTC}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    security_opt:
+      - no-new-privileges:true
+    init: true
+    networks:
+      - webui-network
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: ${POSTGRES_CONTAINER_NAME:-postgres}
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-passwd}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      TZ: ${TZ:-UTC}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    volumes:
+      - ${POSTGRES_DATA_DIR:-postgres/data}:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    security_opt:
+      - no-new-privileges:true
+    shm_size: 256m
+    init: true
+    networks:
+      - webui-network
+
+networks:
+  webui-network:
+    driver: bridge
