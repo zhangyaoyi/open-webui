@@ -5,8 +5,7 @@ IMAGE_TAG=latest
 # Build Docker images
 build:
 	@echo "Building web Docker image: $(DOCKER_REPOSITORY):$(IMAGE_TAG)..."
-	docker-compose -f docker-compose.build.yaml --env-file .env.build build
-
+	docker-compose build
 	@echo "Web Docker image built successfully: $(DOCKER_REPOSITORY):$(IMAGE_TAG)"
 
 # Push Docker images

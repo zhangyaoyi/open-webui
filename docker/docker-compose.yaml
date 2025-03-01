@@ -1,13 +1,16 @@
 services:
   open-webui:
+    build:
+      context: ${CONTEXT:-.}
+      dockerfile: docker/Dockerfile
+      platforms:
+        - ${BUILD_PLATFORM:-linux/amd64}
+      args:
+        USE_CUDA: ${USE_CUDA:-false}
+        USE_CUDA_VER: ${USE_CUDA_VER:-cu121}
+        USE_OLLAMA: ${USE_OLLAMA:-false}
+        USE_EMBEDDING_MODEL: ${USE_EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
+        USE_RERANKING_MODEL: ${USE_RERANKING_MODEL:-}
+        USE_WHISPER_MODEL: ${USE_WHISPER_MODEL:-base}
+        USE_TIKTOKEN_ENCODING_NAME: ${USE_TIKTOKEN_ENCODING_NAME:-cl100k_base}
     image: ${DOCKER_REPOSITORY:-open-webui/open-webui}:${IMAGE_TAG:-latest}
-    container_name: ${CONTAINER_NAME:-open-webui}
-    volumes:
-      - ${DATA_DIR:-/app/backend/data}:/app/backend/data
-    ports:
-      - ${OPEN_WEBUI_PORT-3000}:8080
-    environment:
-      - WEBUI_NAME=${WEBUI_NAME:-Open WebUI}
-
-volumes:
-  open-webui: {}
