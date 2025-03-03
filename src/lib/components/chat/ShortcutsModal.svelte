@@ -214,7 +214,7 @@
 					</div>
 
 					<div class="w-full flex justify-between items-center">
-						<div class=" text-sm">{$i18n.t('Show shortcuts')}</div>
+						<div class=" text-sm">{$i18n.t('Open model selector')}</div>
 
 						<div class="flex space-x-1 text-xs">
 							<div
