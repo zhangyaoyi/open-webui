@@ -742,6 +742,7 @@
 	"Open WebUI uses faster-whisper internally.": "",
 	"Open WebUI uses SpeechT5 and CMU Arctic speaker embeddings.": "",
 	"Open WebUI version (v{{OPEN_WEBUI_VERSION}}) is lower than required version (v{{REQUIRED_VERSION}})": "Tortue Chat versija per sena. Reikalinga (v{{REQUIRED_VERSION}}) versija.",
+	"Open Model Selector": "Atverti modelio selektorius",
 	"OpenAI": "OpenAI",
 	"OpenAI API": "OpenAI API",
 	"OpenAI API Config": "Open AI API nustatymai",

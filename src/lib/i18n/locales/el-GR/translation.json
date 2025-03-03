@@ -742,6 +742,7 @@
 	"Open WebUI uses faster-whisper internally.": "Το Open WebUI χρησιμοποιεί το faster-whisper εσωτερικά.",
 	"Open WebUI uses SpeechT5 and CMU Arctic speaker embeddings.": "Το Open WebUI χρησιμοποιεί τα SpeechT5 και CMU Arctic embeddings ομιλητών.",
 	"Open WebUI version (v{{OPEN_WEBUI_VERSION}}) is lower than required version (v{{REQUIRED_VERSION}})": "Η έκδοση Open WebUI (v{{OPEN_WEBUI_VERSION}}) είναι χαμηλότερη από την απαιτούμενη έκδοση (v{{REQUIRED_VERSION}})",
+	"Open Model Selector": "Ανοίξτε τον προγραμματιστή μοντέλου",
 	"OpenAI": "OpenAI",
 	"OpenAI API": "API OpenAI",
 	"OpenAI API Config": "Διαμόρφωση API OpenAI",

@@ -742,6 +742,7 @@
 	"Open WebUI uses faster-whisper internally.": "Open WebUI bruker faster-whisper internt.",
 	"Open WebUI uses SpeechT5 and CMU Arctic speaker embeddings.": "Open WebUI bruker SpeechT5 og CMU Arctic-høytalerinnbygginger",
 	"Open WebUI version (v{{OPEN_WEBUI_VERSION}}) is lower than required version (v{{REQUIRED_VERSION}})": "Open WebUI-versjonen (v{{OPEN_WEBUI_VERSION}}) er lavere enn den påkrevde versjonen (v{{REQUIRED_VERSION}})",
+	"Open Model Selector": "Åpne modellvalg",
 	"OpenAI": "OpenAI",
 	"OpenAI API": "OpenAI-API",
 	"OpenAI API Config": "API-konfigurasjon for OpenAI",

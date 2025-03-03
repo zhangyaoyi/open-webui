@@ -742,6 +742,7 @@
 	"Open WebUI uses faster-whisper internally.": "Úsáideann Open WebUI cogar níos tapúla go hinmheánach.",
 	"Open WebUI uses SpeechT5 and CMU Arctic speaker embeddings.": "Úsáideann Open WebUI úsáidí SpeechT5 agus CMU leabaithe cainteoir Artach.",
 	"Open WebUI version (v{{OPEN_WEBUI_VERSION}}) is lower than required version (v{{REQUIRED_VERSION}})": "Tá leagan WebUI oscailte (v{{OPEN_WEBUI_VERSION}}) níos ísle ná an leagan riachtanach (v{{REQUIRED_VERSION}})",
+	"Open Model Selector": "Oscail an seilbheis múnla",
 	"OpenAI": "OpenAI",
 	"OpenAI API": "API OpenAI",
 	"OpenAI API Config": "Cumraíocht API OpenAI",

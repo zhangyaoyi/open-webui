@@ -166,8 +166,8 @@
 				// Check if Ctrl + / is pressed
 				if (isCtrlPressed && event.key === '/') {
 					event.preventDefault();
-					console.log('showShortcuts');
-					document.getElementById('show-shortcuts-button')?.click();
+					console.log('openModelSelector');
+					document.getElementById('model-selector-0-button')?.click();
 				}
 
 				// Check if Ctrl + Shift + ' is pressed
