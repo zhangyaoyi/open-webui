@@ -1,6 +1,6 @@
 # Variables
 DOCKER_REPOSITORY=yyzhang4/open-webui
-IMAGE_TAG=latest
+IMAGE_TAG=0.1.0
 
 # Build Docker images
 build:
