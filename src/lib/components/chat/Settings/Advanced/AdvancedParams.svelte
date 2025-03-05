@@ -85,7 +85,7 @@
 	<div>
 		<Tooltip
 			content={$i18n.t(
-				'Default mode works with a wider range of models by calling tools once before execution. Native mode leverages the model’s built-in tool-calling capabilities, but requires the model to inherently support this feature.'
+				'Default mode works with a wider range of models by calling tools once before execution. Native mode leverages the model's built-in tool-calling capabilities, but requires the model to inherently support this feature.'
 			)}
 			placement="top-start"
 			className="inline-tooltip"
@@ -913,7 +913,7 @@
 	<div class=" py-0.5 w-full justify-between">
 		<Tooltip
 			content={$i18n.t(
-				'Sets the size of the context window used to generate the next token. (Default: 2048)'
+				'Sets the size of the context window used to generate the next token. (Default: 32000)'
 			)}
 			placement="top-start"
 			className="inline-tooltip"
@@ -927,7 +927,7 @@
 					class="p-1 px-3 text-xs flex rounded-sm transition shrink-0 outline-hidden"
 					type="button"
 					on:click={() => {
-						params.num_ctx = (params?.num_ctx ?? null) === null ? 2048 : null;
+						params.num_ctx = (params?.num_ctx ?? null) === null ? 32000 : null;
 					}}
 				>
 					{#if (params?.num_ctx ?? null) === null}
@@ -1078,7 +1078,7 @@
 	<div class=" py-0.5 w-full justify-between">
 		<Tooltip
 			content={$i18n.t(
-				'This option sets the maximum number of tokens the model can generate in its response. Increasing this limit allows the model to provide longer answers, but it may also increase the likelihood of unhelpful or irrelevant content being generated.  (Default: 128)'
+				'This option sets the maximum number of tokens the model can generate in its response. Increasing this limit allows the model to provide longer answers, but it may also increase the likelihood of unhelpful or irrelevant content being generated.  (Default: 4096)'
 			)}
 			placement="top-start"
 			className="inline-tooltip"
@@ -1092,7 +1092,7 @@
 					class="p-1 px-3 text-xs flex rounded-sm transition shrink-0 outline-hidden"
 					type="button"
 					on:click={() => {
-						params.max_tokens = (params?.max_tokens ?? null) === null ? 128 : null;
+						params.max_tokens = (params?.max_tokens ?? null) === null ? 4096 : null;
 					}}
 				>
 					{#if (params?.max_tokens ?? null) === null}
