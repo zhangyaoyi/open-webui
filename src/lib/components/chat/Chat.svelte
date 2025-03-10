@@ -1873,11 +1873,6 @@
 
 	const toggleEditor = () => {
 		showEditor = !showEditor;
-		if (showEditor) {
-			editorPane.expand();
-		} else {
-			editorPane.collapse();
-		}
 	};
 </script>
 
@@ -2125,32 +2120,23 @@
 					{/if}
 				</div>
 			</Pane>
+			{#if showEditor}
+				<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
+					<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
+						<EllipsisVertical className="size-4 invisible group-hover:visible" />
+					</div>
+				</PaneResizer>
 
-			<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
-				<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
-					<EllipsisVertical className="size-4 invisible group-hover:visible" />
-				</div>
-			</PaneResizer>
 
-			<Pane
-				bind:pane={editorPane}
-				defaultSize={30}
-				minSize={20}
-				class="border-l border-black dark:border-gray-600"
-				onCollapse={() => {
-					showEditor = false;
-				}}
-				collapsible={true}
-				class="h-full"
-			>
-				<Editor />
-			</Pane>
-
-			<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
-				<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
-					<EllipsisVertical className="size-4 invisible group-hover:visible" />
-				</div>
-			</PaneResizer>
+				<Pane
+					bind:pane={editorPane}
+					defaultSize={30}
+					minSize={20}
+					class="border-l border-gray-200 dark:border-gray-600 h-full pt-10"
+				>
+					<Editor />
+				</Pane>
+			{/if}
 
 			<ChatControls
 				bind:this={controlPaneComponent}

@@ -2,6 +2,9 @@
   import { onMount, onDestroy } from 'svelte';
   import Quill from 'quill';
   import 'quill/dist/quill.snow.css';
+  import MarkdownShortcuts from 'quill-markdown-shortcuts';
+
+  Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
   let editorElement: HTMLElement;
   let quill: any;
@@ -10,6 +13,7 @@
     quill = new Quill(editorElement, {
       theme: 'snow',
       modules: {
+        markdownShortcuts: {},
         toolbar: [
           ['bold', 'italic', 'underline', 'strike'],
           ['blockquote', 'code-block'],
