@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
+	import { createEventDispatcher } from 'svelte';
 
 	import {
 		WEBUI_NAME,
@@ -28,6 +29,7 @@
 	import PencilSquare from '../icons/PencilSquare.svelte';
 
 	const i18n = getContext('i18n');
+	const dispatch = createEventDispatcher();
 
 	export let initNewChat: Function;
 	export let title: string = $WEBUI_NAME;
@@ -162,6 +164,13 @@
 						</div>
 					</button>
 				</Tooltip>
+
+				<button
+					class="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-850 rounded-lg transition"
+					on:click={() => dispatch('toggleEditor')}
+				>
+					<PencilSquare className="size-4" />
+				</button>
 
 				{#if $user !== undefined}
 					<UserMenu

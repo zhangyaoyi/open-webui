@@ -3,6 +3,7 @@
 	import { toast } from 'svelte-sonner';
 	import mermaid from 'mermaid';
 	import { PaneGroup, Pane, PaneResizer } from 'paneforge';
+	import EllipsisVertical from '../icons/EllipsisVertical.svelte';
 
 	import { getContext, onDestroy, onMount, tick } from 'svelte';
 	const i18n: Writable<i18nType> = getContext('i18n');
@@ -85,6 +86,7 @@
 	import Placeholder from './Placeholder.svelte';
 	import NotificationToast from '../NotificationToast.svelte';
 	import Spinner from '../common/Spinner.svelte';
+	import Editor from './Editor.svelte';
 
 	export let chatIdProp = '';
 
@@ -134,6 +136,9 @@
 	let chatFiles = [];
 	let files = [];
 	let params = {};
+
+	let editorPane;
+	let showEditor = false;
 
 	$: if (chatIdProp) {
 		(async () => {
@@ -1865,6 +1870,15 @@
 			}
 		}
 	};
+
+	const toggleEditor = () => {
+		showEditor = !showEditor;
+		if (showEditor) {
+			editorPane.expand();
+		} else {
+			editorPane.collapse();
+		}
+	};
 </script>
 
 <svelte:head>
@@ -1933,6 +1947,7 @@
 			bind:selectedModels
 			shareEnabled={!!history.currentId}
 			{initNewChat}
+			on:toggleEditor={toggleEditor}
 		/>
 
 		<PaneGroup direction="horizontal" class="w-full h-full">
@@ -2110,6 +2125,32 @@
 					{/if}
 				</div>
 			</Pane>
+
+			<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
+				<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
+					<EllipsisVertical className="size-4 invisible group-hover:visible" />
+				</div>
+			</PaneResizer>
+
+			<Pane
+				bind:pane={editorPane}
+				defaultSize={30}
+				minSize={20}
+				class="border-l border-black dark:border-gray-600"
+				onCollapse={() => {
+					showEditor = false;
+				}}
+				collapsible={true}
+				class="h-full"
+			>
+				<Editor />
+			</Pane>
+
+			<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
+				<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
+					<EllipsisVertical className="size-4 invisible group-hover:visible" />
+				</div>
+			</PaneResizer>
 
 			<ChatControls
 				bind:this={controlPaneComponent}
