@@ -6,7 +6,7 @@ export const getEditorContent = async (token: string = '', chatId: string) => {
   const searchParams = new URLSearchParams();
   searchParams.append('chatId', chatId);
 
-  const res = await fetch(`${WEBUI_API_BASE_URL}/editor/content?${searchParams.toString()}`, {
+  const res = await fetch(`${WEBUI_API_BASE_URL}/editor/${chatId}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -34,7 +34,7 @@ export const getEditorContent = async (token: string = '', chatId: string) => {
 export const saveEditorContent = async (token: string = '', chatId: string, content: string) => {
   let error = null;
 
-  const res = await fetch(`${WEBUI_API_BASE_URL}/editor/content`, {
+  const res = await fetch(`${WEBUI_API_BASE_URL}/editor/save`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
