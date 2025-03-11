@@ -27,7 +27,6 @@
 	import AdjustmentsHorizontal from '../icons/AdjustmentsHorizontal.svelte';
 
 	import PencilSquare from '../icons/PencilSquare.svelte';
-	import Notepad from '../icons/Notepad.svelte';
 
 	const i18n = getContext('i18n');
 	const dispatch = createEventDispatcher();
@@ -165,13 +164,6 @@
 						</div>
 					</button>
 				</Tooltip>
-
-				<button
-					class="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-850 rounded-lg transition"
-					on:click={() => dispatch('toggleNotepad')}
-				>
-					<Notepad className="size-4" />
-				</button>
 
 				{#if $user !== undefined}
 					<UserMenu

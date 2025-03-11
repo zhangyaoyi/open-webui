@@ -121,6 +121,7 @@
 	let imageGenerationEnabled = false;
 	let webSearchEnabled = false;
 	let codeInterpreterEnabled = false;
+	let notepadEnabled = false;
 	let chat = null;
 	let tags = [];
 
@@ -138,7 +139,6 @@
 	let params = {};
 
 	let notepadPane;
-	let showNotepad = false;
 
 	$: if (chatIdProp) {
 		(async () => {
@@ -1870,10 +1870,6 @@
 			}
 		}
 	};
-
-	const toggleNotepad = () => {
-		showNotepad = !showNotepad;
-	};
 </script>
 
 <svelte:head>
@@ -1942,7 +1938,6 @@
 			bind:selectedModels
 			shareEnabled={!!history.currentId}
 			{initNewChat}
-			on:toggleNotepad={toggleNotepad}
 		/>
 
 		<PaneGroup direction="horizontal" class="w-full h-full">
@@ -2039,6 +2034,7 @@
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
 								bind:codeInterpreterEnabled
+								bind:notepadEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel
 								transparentBackground={$settings?.backgroundImageUrl ?? false}
@@ -2091,6 +2087,7 @@
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
 								bind:codeInterpreterEnabled
+								bind:notepadEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel
 								transparentBackground={$settings?.backgroundImageUrl ?? false}
@@ -2120,7 +2117,7 @@
 					{/if}
 				</div>
 			</Pane>
-			{#if showNotepad}
+			{#if notepadEnabled}
 				<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
 					<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
 						<EllipsisVertical className="size-4 invisible group-hover:visible" />
@@ -2132,7 +2129,6 @@
 					bind:pane={notepadPane}
 					defaultSize={Number(localStorage.getItem('notepadPaneSize') ?? '30')}
 					minSize={20}
-					maxSize={50}
 					onResize={(size) => {
 						localStorage.setItem('notepadPaneSize', Math.round(Number(size)).toString());
 					}}
