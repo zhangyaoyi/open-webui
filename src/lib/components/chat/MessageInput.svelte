@@ -730,8 +730,8 @@
 														createMessagePair(prompt);
 													}
 
-													// Check if Ctrl + R is pressed
-													if (prompt === '' && isCtrlPressed && e.key.toLowerCase() === 'r') {
+													// Check if Ctrl + Shift + R is pressed
+													if (prompt === '' && isCtrlPressed && e.key.toLowerCase() === 'r' && e.shiftKey) {
 														e.preventDefault();
 														console.log('regenerate');
 
@@ -1229,7 +1229,7 @@
 													</Tooltip>
 												{/if}
 											{/if}
-											{#if chatId}
+											{#if window.location.pathname.startsWith('/c/')}
 												<Tooltip content={$i18n.t('Notepad for context')} placement="top">
 													<button
 														on:click|preventDefault={() => (notepadEnabled = !notepadEnabled)}

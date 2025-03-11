@@ -2028,7 +2028,6 @@
 							<MessageInput
 								{history}
 								{selectedModels}
-								chatId={$chatId}
 								bind:files
 								bind:prompt
 								bind:autoScroll
@@ -2088,7 +2087,6 @@
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
 								bind:codeInterpreterEnabled
-								bind:notepadEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel
 								transparentBackground={$settings?.backgroundImageUrl ?? false}
