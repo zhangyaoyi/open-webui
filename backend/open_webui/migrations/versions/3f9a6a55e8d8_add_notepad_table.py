@@ -4,6 +4,15 @@ Revision ID: 3f9a6a55e8d8
 Revises: 3781e22d8b01
 Create Date: 2024-03-11 11:30:00.000000
 
+CREATE TABLE notepad (
+    chat_id VARCHAR NOT NULL,
+    content TEXT,
+    user_id VARCHAR NOT NULL,
+    created_at BIGINT NOT NULL,
+    updated_at BIGINT NOT NULL,
+    PRIMARY KEY (chat_id)
+);
+
 """
 from alembic import op
 import sqlalchemy as sa
