@@ -3,12 +3,11 @@
 	import Quill from 'quill';
 	import 'quill/dist/quill.snow.css';
 	import MarkdownShortcuts from 'quill-markdown-shortcuts';
-	import { getEditorContent, saveEditorContent } from '$lib/apis/editor';
+	import { getNotepad, saveNotepad } from '$lib/apis/notepads';
 
-	Quill.register('modules/better-table', QuillBetterTable);
 	Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
-	let editorElement: HTMLElement;
+	let notepadElement: HTMLElement;
 	let quill: any;
 	const dispatch = createEventDispatcher();
 
@@ -18,11 +17,10 @@
 	let error = '';
 
 	onMount(async () => {
-		quill = new Quill(editorElement, {
+		quill = new Quill(notepadElement, {
 			theme: 'snow',
 			modules: {
 				markdownShortcuts: {},
-				'better-table': true,
 				toolbar: [
 					['bold', 'italic', 'underline', 'strike'],
 					['blockquote', 'code-block'],
@@ -48,15 +46,15 @@
 				quill.root.innerHTML = content;
 			} else if (chatId) { // Only try to load from server if we have a chatId
 				// Otherwise load from server
-				const res = await getEditorContent(localStorage.token, chatId);
+				const res = await getNotepad(localStorage.token, chatId);
 				if (res?.content) {
 					quill.root.innerHTML = res.content;
 					content = res.content; // Update the prop
 				}
 			}
 		} catch (e) {
-			error = e instanceof Error ? e.message : 'Failed to load content';
-			console.error('Failed to load editor content:', e);
+			error = e instanceof Error ? e.message : 'Failed to load notepad';
+			console.error('Failed to load notepad:', e);
 		}
 
 		// Listen for content changes
@@ -68,11 +66,11 @@
 			
 			try {
 				saving = true;
-				await saveEditorContent(localStorage.token, chatId, newContent);
+				await saveNotepad(localStorage.token, chatId, newContent);
 				error = '';
 			} catch (e) {
-				error = e instanceof Error ? e.message : 'Failed to save content';
-				console.error('Failed to save editor content:', e);
+				error = e instanceof Error ? e.message : 'Failed to save notepad';
+				console.error('Failed to save notepad:', e);
 			} finally {
 				saving = false;
 			}
@@ -87,7 +85,7 @@
 </script>
 
 <div class="h-full flex flex-col bg-white dark:bg-gray-850">
-	<div bind:this={editorElement} class="flex-1 overflow-y-auto" />
+	<div bind:this={notepadElement} class="flex-1 overflow-y-auto" />
 	{#if error}
 		<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
 			{error}

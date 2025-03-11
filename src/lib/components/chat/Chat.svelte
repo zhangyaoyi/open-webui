@@ -86,7 +86,7 @@
 	import Placeholder from './Placeholder.svelte';
 	import NotificationToast from '../NotificationToast.svelte';
 	import Spinner from '../common/Spinner.svelte';
-	import Editor from './Editor.svelte';
+	import Notepad from './Notepad.svelte';
 
 	export let chatIdProp = '';
 
@@ -137,8 +137,8 @@
 	let files = [];
 	let params = {};
 
-	let editorPane;
-	let showEditor = false;
+	let notepadPane;
+	let showNotepad = false;
 
 	$: if (chatIdProp) {
 		(async () => {
@@ -1871,8 +1871,8 @@
 		}
 	};
 
-	const toggleEditor = () => {
-		showEditor = !showEditor;
+	const toggleNotepad = () => {
+		showNotepad = !showNotepad;
 	};
 </script>
 
@@ -1942,7 +1942,7 @@
 			bind:selectedModels
 			shareEnabled={!!history.currentId}
 			{initNewChat}
-			on:toggleEditor={toggleEditor}
+			on:toggleNotepad={toggleNotepad}
 		/>
 
 		<PaneGroup direction="horizontal" class="w-full h-full">
@@ -2120,7 +2120,7 @@
 					{/if}
 				</div>
 			</Pane>
-			{#if showEditor}
+			{#if showNotepad}
 				<PaneResizer class="relative flex w-2 items-center justify-center bg-background group">
 					<div class="z-10 flex h-7 w-5 items-center justify-center rounded-xs">
 						<EllipsisVertical className="size-4 invisible group-hover:visible" />
@@ -2129,16 +2129,16 @@
 
 
 				<Pane
-					bind:pane={editorPane}
-					defaultSize={Number(localStorage.getItem('editorPaneSize') ?? '30')}
+					bind:pane={notepadPane}
+					defaultSize={Number(localStorage.getItem('notepadPaneSize') ?? '30')}
 					minSize={20}
 					maxSize={50}
 					onResize={(size) => {
-						localStorage.setItem('editorPaneSize', Math.round(Number(size)).toString());
+						localStorage.setItem('notepadPaneSize', Math.round(Number(size)).toString());
 					}}
 					class="border-l border-gray-200 dark:border-gray-600 h-full pt-10"
 				>
-					<Editor chatId={$chatId || undefined} />
+					<Notepad chatId={$chatId || undefined} />
 				</Pane>
 			{/if}
 

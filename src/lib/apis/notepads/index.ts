@@ -1,12 +1,9 @@
 import { WEBUI_API_BASE_URL } from '$lib/constants';
 
-export const getEditorContent = async (token: string = '', chatId: string) => {
+export const getNotepad = async (token: string = '', chat_id: string) => {
   let error = null;
 
-  const searchParams = new URLSearchParams();
-  searchParams.append('chatId', chatId);
-
-  const res = await fetch(`${WEBUI_API_BASE_URL}/editor/${chatId}`, {
+  const res = await fetch(`${WEBUI_API_BASE_URL}/notepads/${chat_id}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -31,17 +28,17 @@ export const getEditorContent = async (token: string = '', chatId: string) => {
   return res;
 };
 
-export const saveEditorContent = async (token: string = '', chatId: string, content: string) => {
+export const saveNotepad = async (token: string = '', chat_id: string, content: string) => {
   let error = null;
 
-  const res = await fetch(`${WEBUI_API_BASE_URL}/editor/save`, {
+  const res = await fetch(`${WEBUI_API_BASE_URL}/notepads/save`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       ...(token && { authorization: `Bearer ${token}` })
     },
-    body: JSON.stringify({ chatId: chatId, content: content })
+    body: JSON.stringify({ chat_id: chat_id, content: content })
   })
     .then(async (res) => {
       if (!res.ok) throw await res.json();

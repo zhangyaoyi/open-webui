@@ -168,7 +168,7 @@
 
 				<button
 					class="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-850 rounded-lg transition"
-					on:click={() => dispatch('toggleEditor')}
+					on:click={() => dispatch('toggleNotepad')}
 				>
 					<Notepad className="size-4" />
 				</button>
