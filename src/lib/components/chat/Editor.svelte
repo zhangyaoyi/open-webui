@@ -87,4 +87,8 @@
   :global(.dark .ql-editor.ql-blank::before) {
     color: #6b7280;
   }
+
+  :global(.ql-snow .ql-editor) {
+    font-size: medium !important;
+  }
 </style> 
