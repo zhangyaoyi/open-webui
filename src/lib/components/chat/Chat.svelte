@@ -2028,6 +2028,7 @@
 							<MessageInput
 								{history}
 								{selectedModels}
+								chatId={$chatId}
 								bind:files
 								bind:prompt
 								bind:autoScroll

@@ -75,7 +75,7 @@
 	export let webSearchEnabled = false;
 	export let codeInterpreterEnabled = false;
 	export let notepadEnabled = false;
-	
+	export let chatId = '';
 	$: onChange({
 		prompt,
 		files,
@@ -1229,21 +1229,23 @@
 													</Tooltip>
 												{/if}
 											{/if}
-											<Tooltip content={$i18n.t('Notepad for context')} placement="top">
-												<button
-													on:click|preventDefault={() => (notepadEnabled = !notepadEnabled)}
-													type="button"
-													class="px-1.5 @sm:px-2.5 py-1.5 flex gap-1.5 items-center text-sm rounded-full font-medium transition-colors duration-300 focus:outline-hidden max-w-full overflow-hidden {notepadEnabled
-													? 'bg-gray-100 dark:bg-gray-500/20 text-gray-600 dark:text-gray-400'
-													: 'bg-transparent text-gray-600 dark:text-gray-300 border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 '}"
-												>
-													<Notepad className="size-5" strokeWidth="1.75" />
-													<span
-														class="hidden @sm:block whitespace-nowrap overflow-hidden text-ellipsis translate-y-[0.5px] mr-0.5"
-														>{$i18n.t('Notepad')}</span
+											{#if $chatId}
+												<Tooltip content={$i18n.t('Notepad for context')} placement="top">
+													<button
+														on:click|preventDefault={() => (notepadEnabled = !notepadEnabled)}
+														type="button"
+														class="px-1.5 @sm:px-2.5 py-1.5 flex gap-1.5 items-center text-sm rounded-full font-medium transition-colors duration-300 focus:outline-hidden max-w-full overflow-hidden {notepadEnabled
+															? 'bg-gray-100 dark:bg-gray-500/20 text-gray-600 dark:text-gray-400'
+															: 'bg-transparent text-gray-600 dark:text-gray-300 border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 '}"
 													>
-												</button>
-											</Tooltip>
+														<Notepad className="size-5" strokeWidth="1.75" />
+														<span
+															class="hidden @sm:block whitespace-nowrap overflow-hidden text-ellipsis translate-y-[0.5px] mr-0.5"
+															>{$i18n.t('Notepad')}</span
+														>
+													</button>
+												</Tooltip>
+											{/if}
 										</div>
 									</div>
 
