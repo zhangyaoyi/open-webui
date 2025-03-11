@@ -1229,7 +1229,7 @@
 													</Tooltip>
 												{/if}
 											{/if}
-											{#if $chatId}
+											{#if chatId}
 												<Tooltip content={$i18n.t('Notepad for context')} placement="top">
 													<button
 														on:click|preventDefault={() => (notepadEnabled = !notepadEnabled)}
