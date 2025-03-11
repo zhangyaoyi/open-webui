@@ -2077,7 +2077,7 @@
 							<div
 								class="absolute bottom-1 text-xs text-gray-500 text-center line-clamp-1 right-0 left-0"
 							>
-								<!-- {$i18n.t('LLMs can make mistakes. Verify important information.')} -->
+								{$i18n.t('LLMs can make mistakes. Verify important information.')}
 							</div>
 						</div>
 					{:else}
@@ -2130,11 +2130,15 @@
 
 				<Pane
 					bind:pane={editorPane}
-					defaultSize={30}
+					defaultSize={Number(localStorage.getItem('editorPaneSize') ?? '30')}
 					minSize={20}
+					maxSize={50}
+					onResize={(size) => {
+						localStorage.setItem('editorPaneSize', Math.round(Number(size)).toString());
+					}}
 					class="border-l border-gray-200 dark:border-gray-600 h-full pt-10"
 				>
-					<Editor />
+					<Editor chatId={$chatId || undefined} />
 				</Pane>
 			{/if}
 
