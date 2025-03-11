@@ -184,6 +184,16 @@ def upgrade() -> None:
             sa.UniqueConstraint("api_key"),
             sa.UniqueConstraint("oauth_sub"),
         )
+    if "notepad" not in existing_tables:
+        op.create_table(
+            "notepad",
+            sa.Column("chat_id", sa.String(), nullable=False),
+            sa.Column("content", sa.Text(), nullable=True),
+            sa.Column("user_id", sa.String(), nullable=False),
+            sa.Column("created_at", sa.BigInteger(), nullable=False),
+            sa.Column("updated_at", sa.BigInteger(), nullable=False),
+            sa.PrimaryKeyConstraint("chat_id"),
+        )   
     # ### end Alembic commands ###
 
 
@@ -201,4 +211,5 @@ def downgrade() -> None:
     op.drop_table("chatidtag")
     op.drop_table("chat")
     op.drop_table("auth")
+    op.drop_table("notepad")
     # ### end Alembic commands ###
