@@ -346,7 +346,7 @@
 <FilesOverlay show={dragged} />
 
 {#if loaded}
-	<div class="w-full font-primary">
+	<div class="w-full font-primary mb-2">
 		<div class=" mx-auto inset-x-0 bg-transparent flex justify-center">
 			<div
 				class="flex flex-col px-3 {($settings?.widescreenMode ?? null)
@@ -1229,7 +1229,7 @@
 													</Tooltip>
 												{/if}
 											{/if}
-											{#if window.location.pathname.startsWith('/c/')}
+											{#if chatId || window.location.pathname.startsWith('/c/')}
 												<Tooltip content={$i18n.t('Notepad for context')} placement="top">
 													<button
 														on:click|preventDefault={() => (notepadEnabled = !notepadEnabled)}
