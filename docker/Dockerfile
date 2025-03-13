@@ -24,8 +24,6 @@ ARG GID=0
 FROM node:22-alpine3.20 AS build
 ARG BUILD_HASH
 
-RUN mkdir -p /app/backend/data/
-
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -49,6 +47,13 @@ ARG USE_WHISPER_MODEL
 ARG USE_TIKTOKEN_ENCODING_NAME
 ARG UID
 ARG GID
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
 
 ## Basis ##
 ENV ENV=prod \
@@ -127,6 +132,7 @@ RUN pip3 install uv && \
     #python -c "import os; from faster_whisper import WhisperModel; WhisperModel(os.environ['WHISPER_MODEL'], device='cpu', compute_type='int8', download_root=os.environ['WHISPER_MODEL_DIR'])"; \
     python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])"; \
     fi; \
+    mkdir -p /app/backend/data/ && \
     chown -R $UID:$GID /app/backend/data/
 
 
