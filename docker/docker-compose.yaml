@@ -38,9 +38,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    security_opt:
-      - no-new-privileges:true
-    init: true
     networks:
       - webui-network
 
@@ -69,10 +66,34 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    security_opt:
-      - no-new-privileges:true
     shm_size: 256m
-    init: true
+    networks:
+      - webui-network
+
+# Qdrant
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: ${QDRANT_CONTAINER_NAME:-qdrant}
+    volumes:
+      - ${QDRANT_DATA_DIR:-qdrant/data}:/qdrant/storage:rw
+    ports:
+      - "${QDRANT_PORT:-6333}:6333"
+      - "${QDRANT_GRPC_PORT:-6334}:6334"
+    restart: unless-stopped
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:-}
+      TZ: ${TZ:-UTC}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - webui-network
 
