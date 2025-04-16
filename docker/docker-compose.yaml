@@ -14,6 +14,9 @@ services:
         USE_RERANKING_MODEL: ${USE_RERANKING_MODEL:-}
         USE_WHISPER_MODEL: ${USE_WHISPER_MODEL:-base}
         USE_TIKTOKEN_ENCODING_NAME: ${USE_TIKTOKEN_ENCODING_NAME:-cl100k_base}
+        HTTP_PROXY: ${HTTP_PROXY:-}
+        HTTPS_PROXY: ${HTTPS_PROXY:-}
+        NO_PROXY: ${NO_PROXY:-}
     image: ${DOCKER_REPOSITORY:-open-webui/open-webui}:${IMAGE_TAG:-latest}
     container_name: ${OPEN_WEBUI_CONTAINER_NAME:-open-webui}
     volumes:
