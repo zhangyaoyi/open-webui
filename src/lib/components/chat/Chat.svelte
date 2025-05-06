@@ -240,9 +240,11 @@
 		await tick();
 		await tick();
 
-		const messageElement = document.getElementById(`message-${message.id}`);
-		if (messageElement) {
-			messageElement.scrollIntoView({ behavior: 'smooth' });
+		if ($settings?.scrollOnBranchChange ?? true) {
+			const messageElement = document.getElementById(`message-${message.id}`);
+			if (messageElement) {
+				messageElement.scrollIntoView({ behavior: 'smooth' });
+			}
 		}
 
 		await tick();
@@ -1923,7 +1925,7 @@
 <svelte:head>
 	<title>
 		{$chatTitle
-			? `${$chatTitle.length > 30 ? `${$chatTitle.slice(0, 30)}...` : $chatTitle} | ${$WEBUI_NAME}`
+			? `${$chatTitle.length > 30 ? `${$chatTitle.slice(0, 30)}...` : $chatTitle} • ${$WEBUI_NAME}`
 			: `${$WEBUI_NAME}`}
 	</title>
 </svelte:head>
@@ -2044,7 +2046,7 @@
 								{stopResponse}
 								{createMessagePair}
 								onChange={(input) => {
-									if (input.prompt) {
+									if (input.prompt !== null) {
 										localStorage.setItem(`chat-input-${$chatId}`, JSON.stringify(input));
 									} else {
 										localStorage.removeItem(`chat-input-${$chatId}`);
